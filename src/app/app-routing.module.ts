@@ -11,10 +11,7 @@ const routes: Routes = [
     path: 'login',
     canActivate: [LoginGuardGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
- 
-
-
+  }
 
 ];
 @NgModule({

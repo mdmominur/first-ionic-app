@@ -3,10 +3,11 @@
   <ion-card-header>
     <ion-card-title>{{post.title}}</ion-card-title>
   </ion-card-header>
-  <ion-card-content>
-    {{post.body}}
-  </ion-card-content>
+
   <div *ngIf="isSinglePost; else viewDetailsButton">
+    <ion-card-content>
+      {{post.body}}
+    </ion-card-content>
     <ion-button (click)="goBack()">Go back</ion-button>
   </div>
 

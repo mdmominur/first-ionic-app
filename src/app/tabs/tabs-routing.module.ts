@@ -22,6 +22,10 @@ const routes: Routes = [
         loadChildren: () => import('../post-details/post-details.module').then( m => m.PostDetailsPageModule)
       },
       {
+        path: 'create-post',
+        loadChildren: () => import('../create-post/create-post.module').then( m => m.CreatePostPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
