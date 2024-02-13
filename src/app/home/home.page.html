@@ -1,0 +1,20 @@
+  <div class="main-container">
+    <div class="slider-container">
+      <div class="swiper-wrapper">
+          <swiper-container [loop]="true" [config]="swiperConfig" class="swiper-container">
+            <swiper-slide>
+              <img src="https://png.pngtree.com/png-vector/20220921/ourmid/pngtree-welcome-text-effect-with-colorful-heart-shaped-png-image_6208004.png" alt="">
+            </swiper-slide>
+            <swiper-slide>Slide 2</swiper-slide>
+            <swiper-slide>Slide 3</swiper-slide>
+          </swiper-container>
+      </div>
+    </div>
+    <div *ngIf="isLogin; else elseBlock">
+      <app-login (toggleRegister)="toggleRegister()"></app-login>
+    </div>
+    <ng-template #elseBlock>
+      <app-register (toggleRegister)="toggleRegister()"></app-register>
+    </ng-template>
+    <!-- <ion-button (click)="googleLogin()">Login with google</ion-button> -->
+  </div>  

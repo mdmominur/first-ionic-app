@@ -1,0 +1,23 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
+    padding: 15px;
+    overflow: auto;
+    .slider-container{
+        margin-top: 200px;
+        max-width: 400px;
+        width: 100%;
+        .swiper-wrapper{
+            display: flex;
+            align-items: center;
+            height: 100%;
+            .swiper-container{
+                width: 100%;
+            }
+        }
+    }
+}
