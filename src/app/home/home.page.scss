@@ -7,8 +7,11 @@
     gap: 20px;
     padding: 15px;
     overflow: auto;
+    .message{
+        max-width: 400px;
+        text-align: center;
+    }
     .slider-container{
-        margin-top: 200px;
         max-width: 400px;
         width: 100%;
         .swiper-wrapper{

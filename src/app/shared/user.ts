@@ -5,3 +5,8 @@ export interface User {
     photoURL: string;
     emailVerified: boolean;
  }
+
+ export interface FormUser{
+    email: string;
+    password: string;
+ }

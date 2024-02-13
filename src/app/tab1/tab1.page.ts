@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab1',
@@ -6,7 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-
-  constructor() {}
+  userEmail: string = this.authService?.userDetails?.email;
+  constructor(private authService: AuthService) {
+  }
 
 }

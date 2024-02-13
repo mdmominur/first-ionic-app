@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { FormUser } from '../shared/user';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomePage implements OnInit {
     isLogin:boolean = true;
+    message:string = "";
+    
     // Swiper configuration
     swiperConfig = {
       slidesPerView: 1,
@@ -20,15 +23,58 @@ export class HomePage implements OnInit {
     };
 
     
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService) {
+    }
     googleLogin(){
-      this.authService.GoogleAuth()
+      this.authService.GoogleAuth().then(res => {
+        this.authService.authCheck();
+        if(this.authService.isEmailVerified){
+          this.flashMessage("Logged in success");
+        }else{
+          this.authService.SendVerificationMail();
+          this.flashMessage("We have sent your a mail confirmation message please verify your email address and login.");
+        }
+      })
       //  this.authService.SignIn("momenserdar@gmail.com", "mominur Rahman");
       
     }
 
     toggleRegister(){
       this.isLogin = !this.isLogin;
+    }
+
+    onSubmitRegister(userDetails: FormUser){    
+    this.authService.RegisterUser(userDetails?.email, userDetails?.password).then(res => {
+      this.authService.SendVerificationMail().then(res => {
+        this.flashMessage("We have sent your a mail confirmation message please verify your email address and login.");
+        this.toggleRegister();
+      }).catch(error => {
+        this.flashMessage("INVALID LOGIN CREDENTIALS");
+      })
+    })
+    }
+
+
+    handleLogin(userDetails: FormUser){
+      this.authService.SignIn(userDetails?.email, userDetails.password).then(data => {
+        this.authService.authCheck();
+        if(this.authService.isEmailVerified ||  data?.user?.emailVerified){
+          return;
+        }else{
+          this.authService.SendVerificationMail();
+          this.flashMessage("We have sent your a mail confirmation message please verify your email address and login.");
+        }
+      }).catch(error => {
+          this.flashMessage("INVALID LOGIN CREDENTIALS");
+        
+      })
+    }
+
+    flashMessage(msg: string){
+      this.message = msg;
+      setTimeout(()=>{
+        this.message = "";
+      }, 5000);
     }
 
   ngOnInit() {

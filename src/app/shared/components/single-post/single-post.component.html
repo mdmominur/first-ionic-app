@@ -1,0 +1,16 @@
+<ion-card class="single-post-container">
+  <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+  <ion-card-header>
+    <ion-card-title>{{post.title}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    {{post.body}}
+  </ion-card-content>
+  <div *ngIf="isSinglePost; else viewDetailsButton">
+    <ion-button (click)="goBack()">Go back</ion-button>
+  </div>
+
+  <ng-template #viewDetailsButton>
+        <ion-button (click)="onViewDetails()">View details</ion-button>
+  </ng-template>
+</ion-card>

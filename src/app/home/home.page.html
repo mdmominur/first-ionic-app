@@ -10,11 +10,19 @@
           </swiper-container>
       </div>
     </div>
+
+
+
+    <p class="message" *ngIf="message">{{message}}</p>
+    
     <div *ngIf="isLogin; else elseBlock">
-      <app-login (toggleRegister)="toggleRegister()"></app-login>
+      <app-login (toggleRegister)="toggleRegister()" (handleLogin)="handleLogin($event)"></app-login>
     </div>
     <ng-template #elseBlock>
-      <app-register (toggleRegister)="toggleRegister()"></app-register>
+      <app-register (toggleRegister)="toggleRegister()" (onSubmitRegister)="onSubmitRegister($event)"></app-register>
     </ng-template>
+
+
+
     <!-- <ion-button (click)="googleLogin()">Login with google</ion-button> -->
   </div>  

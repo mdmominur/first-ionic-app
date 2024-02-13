@@ -7,11 +7,17 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class LoginComponent  implements OnInit {
   @Output() toggleRegister = new EventEmitter();
+  @Output() handleLogin = new EventEmitter();
   constructor() { }
 
   handleRegister(){
     this.toggleRegister.emit();
   }
+
+  onLogin(email: any, password: any){
+    this.handleLogin.emit({email, password});
+  }
+
   ngOnInit() {}
 
 }

@@ -21,23 +21,34 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone
   ) {
-    this.ngFireAuth.authState.subscribe((user) => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user') || '{}');
-      } else {
-        localStorage.setItem('user', null || '{}');
-        JSON.parse(localStorage.getItem('user') || '{}');
-      }
-    });
+    this.authCheck();
   }
+
+authCheck(){
+  this.ngFireAuth.authState.subscribe((user) => {
+    if (user) {
+      this.userData = user;
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      JSON.parse(localStorage.getItem('user') || '{}');
+      if(this.isLoggedIn && this.router.url === '/login'){
+        this.router.navigate(['/']);
+      }
+    } else {
+      localStorage.setItem('user', null || '{}');
+      JSON.parse(localStorage.getItem('user') || '{}');
+      if(this.isLoggedIn){
+        this.router.navigate(['/login']);
+      }
+    }
+  });
+}
+
   // Login in with email/password
   SignIn(email: any, password: any) {
     return this.ngFireAuth.signInWithEmailAndPassword(email, password);
   }
   // Register user with email/password
-  RegisterUser(email: any, password: any) {
+  RegisterUser( email: any, password: any) {
     return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
   }
   // Email verification when new user register
@@ -63,13 +74,17 @@ export class AuthService {
   }
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user !== null && user.emailVerified !== false ? true : false;
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user !== null && Object?.keys(user)?.length !== 0 && user.emailVerified !== false ? true : false;
   }
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user.emailVerified !== false ? true : false;
+  }
+  get userDetails(): any {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user;
   }
   // Sign in with Gmail
   GoogleAuth() {
@@ -86,19 +101,18 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        console.log(error)
         window.alert(error);
       });
   }
   // Store user in localStorage
-  SetUserData(user: any) {
+  SetUserData(user: any, name: any = null) {
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(
       `users/${user.uid}`
     );
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName:name? name: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };

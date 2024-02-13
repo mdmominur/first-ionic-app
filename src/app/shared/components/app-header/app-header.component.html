@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="app-header">
+      <ion-title>
+        {{title}}
+      </ion-title>
+      <div class="more-options-wrapper">
+        
+        <ion-button (click)="presentPopover($event)">
+          <ion-icon name="menu-outline"></ion-icon>
+        </ion-button>
+        <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-button expand="full">
+                  Recent post
+              </ion-button>
+              
+              <ion-button (click)="handleSignOut()"  color="danger" expand="full">
+                  Logout
+              </ion-button>
+              
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>

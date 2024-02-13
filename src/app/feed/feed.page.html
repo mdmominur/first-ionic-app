@@ -1,0 +1,15 @@
+<app-app-header title="Feed"></app-app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="main-container">
+
+    <div class="feed-container">
+     <app-single-post *ngFor="let post of postList" [post]="post"></app-single-post>
+    </div>
+    <div class="pagination-container">
+      <ion-button (click)="prevPage()">Previous</ion-button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <ion-button (click)="nextPage()">Next</ion-button>
+    </div>
+  </div>
+</ion-content>
