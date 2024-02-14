@@ -8,7 +8,8 @@ import { IonicModule } from '@ionic/angular';
 @NgModule({
   declarations: [SinglePostComponent],
   imports: [
-    CommonModule, IonicModule
+    CommonModule, IonicModule, 
+    
   ],
   exports: [
     SinglePostComponent

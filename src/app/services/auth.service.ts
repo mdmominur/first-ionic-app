@@ -59,19 +59,6 @@ authCheck(){
       });
     });
   }
-  // Recover password
-  PasswordRecover(passwordResetEmail: any) {
-    return this.ngFireAuth
-      .sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert(
-          'Password reset email has been sent, please check your inbox.'
-        );
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
-  }
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
     let user = JSON.parse(localStorage.getItem('user') || '{}');

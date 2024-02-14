@@ -2,7 +2,15 @@
 
 <ion-content [fullscreen]="true">
   <div class="main-container">
-
+    <div class="slider-container">
+      <div class="swiper-wrapper">
+          <swiper-container [loop]="true" [autoplay]="{delay: 3000}" [slidesPerView]="2" class="swiper-container">
+            <swiper-slide *ngFor="let post of first10Items">
+              <app-single-post [post]="post"></app-single-post>
+            </swiper-slide>
+          </swiper-container>
+      </div>
+    </div>
     <div class="feed-container">
      <app-single-post *ngFor="let post of postList" [post]="post"></app-single-post>
     </div>

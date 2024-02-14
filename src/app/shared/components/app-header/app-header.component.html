@@ -11,7 +11,7 @@
         </ion-button>
         <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
           <ng-template>
-            <ion-content class="ion-padding">
+            <ion-content class="ion-padding" (click)="redirectToRecentPosts()">
               <ion-button expand="full">
                   Recent post
               </ion-button>

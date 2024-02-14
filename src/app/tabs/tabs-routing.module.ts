@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
+    canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
       {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'create-post',
         loadChildren: () => import('../create-post/create-post.module').then( m => m.CreatePostPageModule)
+      },
+      {
+        path: 'recent-post',
+        loadChildren: () => import('../recent-post/recent-post.module').then( m => m.RecentPostPageModule)
       },
       {
         path: '',

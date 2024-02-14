@@ -13,9 +13,10 @@ export class FeedPage implements OnInit {
   currentPage = 1;
   postsPerPage = 10;
   totalPages: number = 0;
+  first10Items: any[] = [];
 
   postList: Post[] = [{body: "", title: "", id: 0, userId: 0}];
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService) {}
 
   ngOnInit() {
     this.fetchPosts();
@@ -23,8 +24,6 @@ export class FeedPage implements OnInit {
 
 
   fetchPosts() {
-    console.log(this.mainPosts);
-    
     if(this.mainPosts?.length === 0){
       this.postService.getAllItems().subscribe(
         (data: any[]) => {
@@ -45,6 +44,7 @@ export class FeedPage implements OnInit {
     const startIndex = (this.currentPage - 1) * this.postsPerPage;
     this.totalPages = Math.ceil(data.length / this.postsPerPage);
     this.postList = data.slice(startIndex, startIndex + this.postsPerPage);
+    this.first10Items = data.slice(0, 10);
   }
 
   nextPage() {
