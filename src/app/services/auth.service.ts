@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
-import * as auth from 'firebase/auth';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { GoogleAuthProvider } from '@angular/fire/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -75,7 +75,7 @@ authCheck(){
   }
   // Sign in with Gmail
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+    return this.AuthLogin(new GoogleAuthProvider());
   }
   // Auth providers
   AuthLogin(provider: any) {
@@ -83,7 +83,7 @@ authCheck(){
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['']);
+          this.router.navigate(['tabs/profile']);
         });
         this.SetUserData(result.user);
       })

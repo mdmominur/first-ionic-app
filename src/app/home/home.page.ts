@@ -27,8 +27,6 @@ export class HomePage implements OnInit {
           this.flashMessage("We have sent your a mail confirmation message please verify your email address and login.");
         }
       })
-      //  this.authService.SignIn("momenserdar@gmail.com", "mominur Rahman");
-      
     }
 
     toggleRegister(){

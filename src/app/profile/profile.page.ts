@@ -9,6 +9,8 @@ import { AuthService } from '../services/auth.service';
 export class ProfilePage implements OnInit {
 
   userEmail: string = this.authService?.userDetails?.email;
+  userDetails = this.authService?.userDetails;
+  dammyAvatar:string = "https://ionicframework.com/docs/img/demos/avatar.svg"; 
   constructor(private authService: AuthService) {
   }
 

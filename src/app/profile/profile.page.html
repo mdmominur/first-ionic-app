@@ -3,9 +3,10 @@
 <ion-content [fullscreen]="true">
   <div class="main-container">
     <ion-avatar>
-      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <img alt="Silhouette of a person's head" [src]="userDetails?.photoURL ? userDetails?.photoURL: dammyAvatar" />
     </ion-avatar>
-    <p>{{userEmail}}</p>
+    <p>{{userDetails?.displayName}}</p>
+    <p>{{userDetails?.email}}</p>
   </div>
   
 </ion-content>
