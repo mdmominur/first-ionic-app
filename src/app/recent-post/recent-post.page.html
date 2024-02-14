@@ -1,13 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>recent-post</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-app-header title="Recent posts"></app-app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recent-post</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="main-container">
+    <div class="recent-post-container">
+     <app-single-post *ngFor="let post of postList" [post]="post"></app-single-post>
+    </div>
+  </div>
 </ion-content>

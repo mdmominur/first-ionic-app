@@ -1,0 +1,10 @@
+.page-not-found-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    h2{
+        max-width: 400px;
+        text-align: center;
+    }
+}

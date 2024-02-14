@@ -24,7 +24,9 @@ export class AppHeaderComponent  implements OnInit {
 
   redirectToRecentPosts(){
     this.handlePopoverClose();
-    this.router.navigate(['tabs/recent-post']);
+    setTimeout(() => {
+      this.router.navigate(['tabs/recent-post']);
+    }, 250);
   }
 
   handleSignOut(){

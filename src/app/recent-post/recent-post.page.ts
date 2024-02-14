@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-recent-post',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentPostPage implements OnInit {
   postList: any[] = [];
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit() {
+    this.postService.getAllItems().subscribe(
+      (data: any[]) => {
+       this.postList = data?.slice(-10);
+      },
+      error => {
+        console.error('Error fetching posts:', error);
+      }
+    );
   }
+
+  
 
 }

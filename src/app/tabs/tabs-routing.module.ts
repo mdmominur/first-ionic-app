@@ -11,8 +11,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'profile',
+        loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
       },
       {
         path: 'feed',
@@ -32,14 +32,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/profile',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/profile',
     pathMatch: 'full'
   }
 ];

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginGuardGuard } from './guards/login-guard.guard';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 const routes: Routes = [
   {
@@ -11,9 +12,8 @@ const routes: Routes = [
     path: 'login',
     canActivate: [LoginGuardGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  }
-
-
+  },
+  { path: '**', component: NotFoundPageComponent } 
 ];
 @NgModule({
   imports: [
