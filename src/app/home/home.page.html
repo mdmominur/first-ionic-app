@@ -1,24 +1,18 @@
-  <div class="main-container">
-    <div class="slider-container">
-      <div class="swiper-wrapper">
-          <swiper-container [loop]="true" [autoplay]="{delay: 3000}" class="swiper-container">
-            <swiper-slide *ngFor="let slideImage of slideImages">
-              <img [src]="slideImage" alt="">
-            </swiper-slide>
-          </swiper-container>
+  
+  
+  <ion-content>
+    <div class="main-container">
+      <div class="logo-container">
+        <img src="assets/icon.png" alt="">
       </div>
-    </div>
-
-    <p class="message" *ngIf="message">{{message}}</p>
-    
-    <div *ngIf="isLogin; else elseBlock">
-      <app-login (toggleRegister)="toggleRegister()" (handleLogin)="handleLogin($event)"></app-login>
-    </div>
-    <ng-template #elseBlock>
-      <app-register (toggleRegister)="toggleRegister()" (onSubmitRegister)="onSubmitRegister($event)"></app-register>
-    </ng-template>
-
-
-
-    <ion-button (click)="googleLogin()">Login with google</ion-button>
-  </div>  
+      <p class="message" *ngIf="message">{{message}}</p>
+      
+      <div *ngIf="isLogin; else elseBlock">
+        <app-login (toggleRegister)="toggleRegister()" (handleLogin)="handleLogin($event)"></app-login>
+      </div>
+      <ng-template #elseBlock>
+        <app-register (toggleRegister)="toggleRegister()" (onSubmitRegister)="onSubmitRegister($event)"></app-register>
+      </ng-template>
+  
+    </div>  
+  </ion-content>

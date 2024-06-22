@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-tabs',
@@ -9,7 +8,7 @@ import { PostService } from '../services/post.service';
 })
 export class TabsPage {
 
-  constructor(private route: ActivatedRoute, private postService: PostService) {}
+  constructor(private route: ActivatedRoute) {}
   ngOnInit(){ }
 
 }

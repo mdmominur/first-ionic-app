@@ -9,4 +9,5 @@ export interface User {
  export interface FormUser{
     email: string;
     password: string;
+    fullName: string;
  }

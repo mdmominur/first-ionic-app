@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormUser } from '../shared/user';
+import { updateProfile  } from '@angular/fire/auth';
+import { GeneralService } from '../services/general.service';
 
 @Component({
   selector: 'app-home',
@@ -10,23 +12,7 @@ import { FormUser } from '../shared/user';
 export class HomePage implements OnInit {
     isLogin:boolean = true;
     message:string = "";
-    slideImages = [
-      'https://png.pngtree.com/png-vector/20220921/ourmid/pngtree-welcome-text-effect-with-colorful-heart-shaped-png-image_6208004.png',
-      'https://img.freepik.com/free-vector/hand-drawn-collage-background_23-2149590537.jpg?t=st=1707852423~exp=1707853023~hmac=2ec056a7810bd358cf75a722a7da28c6c781a39a22dbae34d1948c6e90a307c2',
-      'https://img.freepik.com/free-vector/hand-drawn-collage-design_23-2149543516.jpg?t=st=1707852423~exp=1707853023~hmac=baca39744ebe04390b0096a9398a2637d4c9d8a3b380298fbffdb80a357a1239&w=826'
-  ];
-    constructor(private authService: AuthService) {
-    }
-    googleLogin(){
-      this.authService.GoogleAuth().then(res => {
-        this.authService.authCheck();
-        if(this.authService.isEmailVerified){
-          this.flashMessage("Logged in success");
-        }else{
-          this.authService.SendVerificationMail();
-          this.flashMessage("We have sent your a mail confirmation message please verify your email address and login.");
-        }
-      })
+    constructor(private authService: AuthService, private generalService: GeneralService) {
     }
 
     toggleRegister(){
@@ -34,15 +20,22 @@ export class HomePage implements OnInit {
     }
 
     onSubmitRegister(userDetails: FormUser){    
-      if(userDetails?.email?.trim() === "" || userDetails?.password?.trim() === ""){
-        alert("Credentials should not be empty")
+      if(userDetails?.email?.trim() === "" || userDetails?.password?.trim() === "" || userDetails?.fullName?.trim() === ""){
+        alert("Credentials should not be empty");
       }else{
-        this.authService.RegisterUser(userDetails?.email, userDetails?.password).then(res => {
-          this.authService.SendVerificationMail().then(res => {
+        this.generalService.setGlobalLoading(true);
+        this.authService.RegisterUser(userDetails?.email, userDetails?.password).then((res:any) => {
+          updateProfile(res?.user, {
+            displayName: userDetails?.fullName?.trim()
+          });
+          this.authService.SendVerificationMail().then(response => {
             this.flashMessage("We have sent your a mail confirmation message please verify your email address and login.");
             this.toggleRegister();
+            this.generalService.setGlobalLoading(false);
           }).catch(error => {
+            console.log("error ===>", error);
             this.flashMessage("INVALID LOGIN CREDENTIALS");
+            this.generalService.setGlobalLoading(false);
           })
         })
       }
@@ -53,8 +46,10 @@ export class HomePage implements OnInit {
       if(userDetails?.email?.trim() === "" || userDetails?.password?.trim() === ""){
         alert("Credentials should not be empty")
       }else{
+        this.generalService.setGlobalLoading(true);
         this.authService.SignIn(userDetails?.email, userDetails.password).then(data => {
           this.authService.authCheck();
+          this.generalService.setGlobalLoading(false);
           if(this.authService.isEmailVerified ||  data?.user?.emailVerified){
             return;
           }else{
@@ -62,6 +57,7 @@ export class HomePage implements OnInit {
             this.flashMessage("We have sent your a mail confirmation message please verify your email address and login.");
           }
         }).catch(error => {
+          this.generalService.setGlobalLoading(false);
             this.flashMessage("INVALID LOGIN CREDENTIALS");
           
         })

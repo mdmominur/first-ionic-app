@@ -24,3 +24,99 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+:host{
+}
+ ion-backdrop {
+  --ion-backdrop-color: rgba(224, 224, 224, 0.3);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 8px );
+  -webkit-backdrop-filter: blur( 8px );
+  --backdrop-opacity: 1;
+  }
+body {
+  padding-top: env(safe-area-inset-top);
+  font-size: 16px;
+  background-color: rgba(224, 224, 224, 0.3);
+  backdrop-filter: blur( 8px );
+  -webkit-backdrop-filter: blur( 8px );
+  ion-popover {
+    --ion-backdrop-color: #0000;
+
+    --ion-backdrop-color: rgba(224, 224, 224, 0.3);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    --backdrop-opacity: 1;
+    --background: #ffffff44;
+  
+    }
+    
+  }
+
+  ion-action-sheet{
+    .action-sheet-wrapper {
+      padding: 0 16px;
+      background: none;
+      .action-sheet-group{
+        margin-bottom: 15px;
+        border-radius: 15px;
+        background: none;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        box-shadow: 0 4px 32px 0 rgba( 31, 38, 135, 0.37 );
+      }
+      .action-sheet-title {
+        text-align: center;
+        background: #eeeeee5b;
+      }
+      .action-sheet-button {
+        text-align: center;
+        background: #eeeeee5b;
+        &.action-sheet-destructive{
+          color: red;
+        }
+        .action-sheet-button-inner{
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+.expense-tr{
+  td{
+    .td-container{
+         &.first-td{
+           display: flex;
+           align-items: center;
+           gap: 5px;
+         }
+         small{
+          color: rgb(121, 121, 121);
+         }
+        padding: 2px;
+        .toggle-icon{
+          font-size: 25px;
+          color: #3880ff;
+          display: flex;
+        }
+       }
+    }
+    td:first-child {
+    width: 100%; /* Takes up remaining space */
+    white-space: nowrap;
+    padding-left: 0;
+    }
+
+    td:last-child {
+    padding-right: 0;
+    }
+    td:nth-child(n+2) {
+    white-space: nowrap; /* Adjust width according to content */
+    width: auto;
+    text-align: right;
+    }
+}
+
+/* Works - pass "my-custom-class" in cssClass to increase specificity */
+.my-custom-class .action-sheet-group {
+  background: #e5e5e5;
+}

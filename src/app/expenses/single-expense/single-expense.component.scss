@@ -1,0 +1,22 @@
+tr{
+    td{
+        padding: 5px;
+    }
+    border-bottom: 1px solid #ccc;
+}
+
+td:first-child {
+    width: 100%; /* Takes up remaining space */
+    white-space: nowrap;
+    padding-left: 0;
+}
+
+td:last-child {
+    padding-right: 0;
+}
+td:nth-child(n+2) {
+    white-space: nowrap; /* Adjust width according to content */
+    width: auto;
+    text-align: right;
+}
+

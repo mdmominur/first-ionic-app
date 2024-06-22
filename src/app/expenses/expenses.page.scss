@@ -1,0 +1,149 @@
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 8px;
+    .feed-container, .slider-container{
+        padding: 20px;
+        max-width: 400px;
+    }
+
+    .pagination-container{
+        padding-bottom: 20px;
+        text-align: center;
+        span{
+            font-size: 18px;
+            display: inline-block;
+            padding: 0 10px;
+        }
+    }
+}
+
+.expanse-table-wrapper{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.expanse-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
+    font-size: 15px;
+    tr{
+        td, th{
+            padding: 5px;
+        }
+        border-top: 1px solid #ccc;
+
+        td:first-child {
+            width: 100%; /* Takes up remaining space */
+            white-space: nowrap;
+            padding-left: 0;
+        }
+        
+        td:last-child {
+            padding-right: 0;
+        }
+        td:nth-child(n+2) {
+            white-space: nowrap; /* Adjust width according to content */
+            width: auto;
+            text-align: right;
+        }
+    }
+
+
+    th:first-child, td:first-child {
+        width: 100%; /* Takes up remaining space */
+        white-space: nowrap;
+        padding-left: 0;
+    }
+
+    th:last-child, td:last-child {
+        padding-right: 0;
+    }
+
+    th:nth-child(n+2), td:nth-child(n+2) {
+        white-space: nowrap; /* Adjust width according to content */
+        width: auto;
+        text-align: right;
+    }
+
+    tfoot{
+        tr{
+            border-top: 1px solid #ccc;
+            td{
+                padding: 5px;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+.total-details-container{
+    margin-top: 20px;
+    width: 100%;
+    font-size: 14px;
+    ion-col{
+        text-align: center;
+        p{
+            font-weight: 600;
+        }
+    }
+}
+ion-datetime{
+    // background: #fff0;
+}
+
+ion-backdrop {
+    // opacity: 0.9;
+    // background: var(--ion-color-primary);
+
+    background: rgba(224, 224, 224, 0.3);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    opacity: 1;
+  }
+
+.add-expense-inner{
+    position: absolute;
+    padding-top: 50px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 99;
+    padding: 50px 10px 70px;
+    overflow-y: auto;
+    .single-add-expense{
+        margin-top: 15px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        box-shadow: 0 4px 32px 0 rgba( 31, 38, 135, 0.37 );
+        background: #eeeeee5b;
+        border-radius: 10px;
+        padding: 0px 10px;
+    }
+}
+
+.close-container{
+    padding-top: 7px;
+    text-align: right;
+    color: red;
+    font-size: 20px;
+}
+
+.add-expense-buttons-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) auto;
+    position: sticky;
+    margin-top: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 8px;
+    gap: 5px;
+    z-index: 99;
+}

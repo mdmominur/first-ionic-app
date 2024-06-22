@@ -8,6 +8,14 @@
     padding: 15px;
     overflow: auto;
     background-color: #fff;
+
+    .logo-container{
+        text-align: center;
+        img{
+            width: 100px;
+            height: auto;
+        }
+    }
     .message{
         max-width: 400px;
         text-align: center;

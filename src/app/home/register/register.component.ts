@@ -9,13 +9,14 @@ export class RegisterComponent  implements OnInit {
   @Output() toggleRegister = new EventEmitter();
   @Output() onSubmitRegister = new EventEmitter();
 
-  constructor() { }
+  constructor(
+  ) { }
   handleLoginClick(){
     this.toggleRegister.emit();
   }
 
-  handleOnSubmitForm(email: any, password: any){
-    this.onSubmitRegister.emit({email: email.value, password: password.value});
+  handleOnSubmitForm(email: any, password: any, fullName: any){
+    this.onSubmitRegister.emit({email: email.value, password: password.value, fullName: fullName.value});
   }
 
   ngOnInit() {}

@@ -1,0 +1,40 @@
+<ng-template #childComponentTemplate>
+  <tr class="expense-tr"  [style.border-top]="treeLevel === 1 ? '1px solid #ccc': 'none'">
+    <td colspan="10" [style.padding-left]="paddingLeft" style="padding: 0;">
+      <div [style.border-top]="treeLevel !== 1 ? '1px solid #ccc': 'none'" class="td-container first-td">
+        <span class="toggle-icon" 
+        [style.transform]="isSubOpen ? 'rotate(45deg)' : 'none'" 
+        [style.opacity]="!!singleExpense?.sub && singleExpense?.sub?.length ? '1': '.5'"
+        [style.cursor]="!!singleExpense?.sub && singleExpense?.sub?.length ? 'pointer': 'not-allowed'"
+        (click)="toggleSubExpense()"
+        >
+          <ion-icon name="chevron-forward-circle-outline"></ion-icon>
+        </span> 
+        <span>
+          {{singleExpense.label}} <br>
+          <small>{{singleExpense.formatted_created_at}}</small>
+        </span>
+        <span class="toggle-icon" (click)="handleMenuOptions()">
+          <ion-icon name="ellipsis-vertical-circle-outline"></ion-icon>
+        </span>
+      </div>
+      <ion-action-sheet
+      [isOpen]="isActionSheetOpen"
+      header="Actions"
+      [buttons]="actionSheetButtons"
+      (didDismiss)="closeMenuOptions($event)"
+    ></ion-action-sheet>
+    </td>
+    <td [style.border-top]="treeLevel !== 1 ? '1px solid #ccc': 'none'"><div class="td-container" style="padding-right: 10px;">{{singleExpense.expected - singleExpense.done}}</div></td>
+    <td [style.border-top]="treeLevel !== 1 ? '1px solid #ccc': 'none'"><div class="td-container">{{singleExpense.done}} <br>
+      <small>(Exp. {{singleExpense.expected}})</small>
+    </div></td>
+    <!-- <td [style.border-top]="treeLevel !== 1 ? '1px solid #ccc': 'none'"><div class="td-container">{{singleExpense.expected}}</div></td> -->
+  </tr>
+  <ng-container *ngIf="isSubOpen && !!singleExpense?.sub && singleExpense?.sub?.length > 0">
+    <ng-container *ngFor="let singleExpense of singleExpense?.sub">
+      <app-single-expense #wrapper [singleExpense]="singleExpense" [treeLevel]="treeLevel+1" (handleSubExpense)="handleSubExpenseFromChild($event)"></app-single-expense>
+      <ng-content *ngTemplateOutlet="wrapper.childComponentTemplate"></ng-content>
+    </ng-container>
+  </ng-container>
+</ng-template>

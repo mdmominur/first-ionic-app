@@ -1,3 +1,12 @@
 <ion-app>
+    <ion-loading [isOpen]="generalService.getIsGlobalLoading"  spinner="circles"></ion-loading>
+    <ion-toast
+      [isOpen]="this.generalService.getGlobalToast.open"
+      [duration]="this.generalService.getGlobalToast.duration"
+      [message]="this.generalService.getGlobalToast.message"
+      class="custom-toast"
+      [position]="this.generalService.getGlobalToast.position"
+      [color]="this.generalService.getGlobalToast.color"
+    ></ion-toast>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
